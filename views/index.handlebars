@@ -1,1 +1,57 @@
-<h1>Test!!!!!!</h1>
+<div class="container mt-3">
+  <div class="row d-flex flex-column align-items-center">
+    <!--分類卷軸-->
+    <div class="col-1">
+      <select class="form-select" aria-label="Default select example">
+        <option selected>類別</option>
+        <option value="1">家居物業</option>
+        <option value="2">交通出行</option>
+        <option value="3">休閒娛樂</option>
+        <option value="4">餐飲食品</option>
+        <option value="5">其他</option>
+      </select>
+    </div>
+    <!--總金額-->
+    <div class="col-4 text-center mt-3 badge bg-dark text-wrap fs-1" style="width:24rem;>
+      <p class="m-0">總金額: 33788元</p>
+    </div>
+    
+    <!--細項-->
+    <ul class="list-group col-8 mt-3">
+
+      <li class="list-group-item d-flex flex-row align-items-center">
+        <div class="col-3 ">ICON</div>
+        <div class="col-4">
+          <p class="m-0">午餐</p>
+          <p class="m-0">2021/12/21</p>
+        </div>
+        <div class="col-3 text-center">80元</div>
+        <a class="btn btn-outline-primary" href="/edit">修改</a>
+        <a class="btn btn-outline-danger" href="/">刪除</a>
+      </li>
+      <li class="list-group-item d-flex flex-row align-items-center">
+        <div class="col-3 ">ICON</div>
+        <div class="col-4">
+          <p class="m-0">晚餐</p>
+          <p class="m-0">2021/12/21</p>
+        </div>
+        <div class="col-3 text-center">75元</div>
+        <a class="btn btn-outline-primary" href="/edit">修改</a>
+        <a class="btn btn-outline-danger" href="/">刪除</a>
+      </li>
+      <li class="list-group-item d-flex flex-row align-items-center">
+        <div class="col-3 ">ICON</div>
+        <div class="col-4">
+          <p class="m-0">捷運</p>
+          <p class="m-0">2021/12/21</p>
+        </div>
+        <div class="col-3 text-center">35元</div>
+        <a class="btn btn-outline-primary" href="/edit">修改</a>
+        <a class="btn btn-outline-danger" href="/">刪除</a>
+      </li>
+
+    </ul>
+    <!--新增按鈕-->
+    <a class="btn btn-warning col-2 mt-3" href="/new" role="button">新增支出項目</a>
+  </div>
+</div>
