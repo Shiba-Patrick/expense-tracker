@@ -52,12 +52,12 @@ app.get('/new', (req, res) => {
 app.post('/new', async (req, res) => {
   try {
     const body = req.body
-    const categoryItem = await Category.findOne({ name: body.category })
+    const categoryId = await Category.findOne({ name: body.category })
     await Record.create({
       name: body.name,
-      date: body.name,
-      cost: body.name,
-      categoryId: categoryItem._id
+      date: body.date,
+      cost: body.cost,
+      categoryId: categoryId._id
     })
     res.redirect('/')
   }
