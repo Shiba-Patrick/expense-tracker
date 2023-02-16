@@ -20,7 +20,7 @@
     <ul class="list-group col-8 mt-3">
       {{#each records}}
       <li class="list-group-item d-flex flex-row align-items-center">
-        <div class="col-3 "> {{{this.categoryIcon}}} </div>
+        <div class="col-3"> {{{this.categoryIcon}}} </div>
         <div class="col-4">
           <p class="m-0"> {{this.name}} </p>
           <p class="m-0"> {{this.date}} </p>
@@ -35,6 +35,7 @@
       </li>
       {{/each}}
     </ul>
+
     <!--新增按鈕-->
     <a class="btn btn-warning col-2 mt-3" href="/records/new" role="button">新增支出項目</a>
   </div>
