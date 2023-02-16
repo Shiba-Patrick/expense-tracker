@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="row d-flex flex-column align-items-center">
-    <form class="col-4" action="/edit/{{record._id}}" method="post">
+    <form class="col-4" action="/records/{{record._id}}?_method=PUT" method="post">
       <div class="mb-4 d-flex flex-row row">
         <p class="col-4 text-danger fw-light m-0 fs-5">欄位皆為必填</p>
         <p class="col m-0 text-center badge bg-secondary fs-4">請修改內容</p>

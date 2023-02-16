@@ -2,9 +2,10 @@ const express = require('express')
 const express_hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
+const methodOverride = require('method-override')
+
 const Record = require('./models/record')
 const Category = require('./models/category')
-const category = require('./models/category')
 const app = express()
 const port = 3000
 
@@ -28,6 +29,7 @@ app.engine('handlebars', express_hbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars')
 
 app.use(bodyParser.urlencoded({ extended: true })) //連結post傳入
+app.use(methodOverride('_method'))//解構CRUD
 
 //home page
 app.get('/', async (req, res) => {
@@ -45,12 +47,12 @@ app.get('/', async (req, res) => {
 })
 
 //new page
-app.get('/new', (req, res) => {
+app.get('/records/new', (req, res) => {
   res.render('new')
 })
 
 //post new table
-app.post('/new', async (req, res) => {
+app.post('/records', async (req, res) => {
   try {
     const body = req.body
     const categoryItem = await Category.findOne({ name: body.category })
@@ -68,7 +70,7 @@ app.post('/new', async (req, res) => {
 })
 
 //edit page
-app.get('/edit/:_id', (req, res) => {
+app.get('/records/:_id/edit', (req, res) => {
   const id = req.params._id
   Record.findOne({ _id: id })
     .lean()
@@ -86,7 +88,7 @@ app.get('/edit/:_id', (req, res) => {
 })
 
 //post edit table
-app.post('/edit/:_id', (req, res) => {
+app.put('/records/:_id', (req, res) => {
   const id = req.params._id
   const body = req.body
   return Category.findOne({ name: body.category })
@@ -105,7 +107,7 @@ app.post('/edit/:_id', (req, res) => {
 })
 
 //delete function
-app.get('/delete/:_id', (req, res) => {
+app.delete('/records/:_id', (req, res) => {
   const id = req.params._id
   return Record.findOne({ _id: id })
     .then(record => record.remove())

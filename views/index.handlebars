@@ -4,11 +4,11 @@
     <div class="col-3">
       <select class="form-select" aria-label="Default select example">
         <option selected>項目</option>
-        <option value="1">家居物業</option>
-        <option value="2">交通出行</option>
-        <option value="3">休閒娛樂</option>
-        <option value="4">餐飲食品</option>
-        <option value="5">其他</option>
+        <option value="家居物業">家居物業</option>
+        <option value="交通出行">交通出行</option>
+        <option value="休閒娛樂">休閒娛樂</option>
+        <option value="餐飲食品">餐飲食品</option>
+        <option value="其他">其他</option>
       </select>
     </div>
     <!--總金額-->
@@ -26,12 +26,16 @@
           <p class="m-0"> {{this.date}} </p>
         </div>
         <div class="col-3 text-center">{{this.cost}}元</div>
-        <a class="btn btn-outline-primary" href="/edit/{{this._id}}">修改</a>
-        <a class="btn btn-outline-danger" href="/delete/{{this._id}}">刪除</a>
+        <form class="col-1 text-end" action="/records/{{this._id}}/edit" method="GET">
+          <button type="submit" class="btn btn-outline-primary">修改</button>
+        </form>
+        <form class="col-1 text-end" action="/records/{{ this._id }}?_method=DELETE" method="POST">
+          <button type="submit" class="btn btn-outline-danger">刪除</button>
+        </form>
       </li>
       {{/each}}
     </ul>
     <!--新增按鈕-->
-    <a class="btn btn-warning col-2 mt-3" href="/new" role="button">新增支出項目</a>
+    <a class="btn btn-warning col-2 mt-3" href="/records/new" role="button">新增支出項目</a>
   </div>
 </div>

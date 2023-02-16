@@ -12,7 +12,7 @@ const categoryList = [
   },
   {
     name: '休閒娛樂',
-    icon: '<i class="fa-solid fa-face-grin-beam"></i'
+    icon: '<i class="fa-solid fa-face-grin-beam"></i>'
   },
   {
     name: '餐飲食品',
