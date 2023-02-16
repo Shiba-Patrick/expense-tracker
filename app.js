@@ -105,8 +105,12 @@ app.post('/edit/:_id', (req, res) => {
 })
 
 //delete function
-app.get('/delete', (req, res) => {
-  res.redirect('/')
+app.get('/delete/:_id', (req, res) => {
+  const id = req.params._id
+  return Record.findOne({ _id: id })
+    .then(record => record.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 app.listen(port, () => {
