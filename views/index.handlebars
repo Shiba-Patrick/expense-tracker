@@ -1,9 +1,9 @@
 <div class="container mt-3">
   <div class="row d-flex flex-column align-items-center">
     <!--分類卷軸-->
-    <div class="col-1">
+    <div class="col-3">
       <select class="form-select" aria-label="Default select example">
-        <option selected>類別</option>
+        <option selected>項目</option>
         <option value="1">家居物業</option>
         <option value="2">交通出行</option>
         <option value="3">休閒娛樂</option>
@@ -18,19 +18,21 @@
     
     <!--細項-->
     <ul class="list-group col-8 mt-3">
-
+      {{#each records}}
       <li class="list-group-item d-flex flex-row align-items-center">
         <div class="col-3 ">ICON</div>
         <div class="col-4">
-          <p class="m-0">午餐</p>
-          <p class="m-0">2021/12/21</p>
+          <p class="m-0">{{this.name}}</p>
+          <p class="m-0">{{this.date}}</p>
         </div>
-        <div class="col-3 text-center">80元</div>
+        <div class="col-3 text-center">{{this.cost}}元</div>
         <a class="btn btn-outline-primary" href="/edit">修改</a>
         <a class="btn btn-outline-danger" href="/delete">刪除</a>
       </li>
+      {{/each}}
+
       <li class="list-group-item d-flex flex-row align-items-center">
-        <div class="col-3 ">ICON</div>
+        <div class="col-3 "><i class="fa-solid fa-van-shuttle"></i></div>
         <div class="col-4">
           <p class="m-0">晚餐</p>
           <p class="m-0">2021/12/21</p>
