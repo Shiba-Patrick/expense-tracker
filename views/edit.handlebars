@@ -1,6 +1,6 @@
 <div class="container mt-5">
   <div class="row d-flex flex-column align-items-center">
-    <form class="col-4" action="/edit" method="post">
+    <form class="col-4" action="/edit/{{record._id}}" method="post">
       <div class="mb-4 d-flex flex-row row">
         <p class="col-4 text-danger fw-light m-0 fs-5">欄位皆為必填</p>
         <p class="col m-0 text-center badge bg-secondary fs-4">請修改內容</p>
@@ -8,18 +8,20 @@
       <!--內容>日期>類別>金額-->
       <div class="mb-3 d-flex flex-row row">
         <label for="name" class="form-label col-4 m-0 d-flex align-items-center">內容:</label>
-        <input type="text" class="form-control col" id="name" name="name" aria-describedby="name" placeholder="請輸入內容" value="{{body.name}}"
+        <input type="text" class="form-control col" id="name" name="name" aria-describedby="name" placeholder="請輸入內容" value="{{record.name}}"
           required>
       </div>
       <div class="mb-3 d-flex flex-row row">
         <label for="date" class="form-label col-4 m-0 d-flex align-items-center">日期:
         </label>
-        <input type="date" class="form-control col" id="date" name="date" aria-describedby="date" value="{{body.date}}" required>
+        <input type="date" class="form-control col" id="date" name="date" aria-describedby="date" value="{{record.date}}" required>
       </div>
       <div class="mb-3 d-flex flex-row row">
         <label for="category" class="form-label col-4 m-0 d-flex align-items-center">項目:</label>
+
         <select class="form-select col" aria-label="Default select example" id="category" name="category" required>
-          <option value="{{body.category}}" hidden="hidden" selected="selected">{{body.category}}
+          <option value="{{record.categoryName}}" hidden="hidden" selected="selected">{{record.categoryName}}</option>
+
           <option value="家居物業">家居物業</option>
           <option value="交通出行">交通出行</option>
           <option value="休閒娛樂">休閒娛樂</option>
@@ -29,7 +31,7 @@
       </div>
       <div class="mb-3 d-flex flex-row row">
         <label for="cost" class="form-label col-4 m-0 d-flex align-items-center">金額:</label>
-        <input type="number" min="0" class="form-control col" id="cost" name="cost" aria-describedby="cost" placeholder="請輸入金額" value="{{body.cost}}"
+        <input type="number" min="0" class="form-control col" id="cost" name="cost" aria-describedby="cost" placeholder="請輸入金額" value="{{record.cost}}"
           required>
       </div>
       <div class="d-flex justify-content-center">

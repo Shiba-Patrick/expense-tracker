@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const Record = require('./models/record')
 const Category = require('./models/category')
+const category = require('./models/category')
 const app = express()
 const port = 3000
 
@@ -52,12 +53,12 @@ app.get('/new', (req, res) => {
 app.post('/new', async (req, res) => {
   try {
     const body = req.body
-    const categoryId = await Category.findOne({ name: body.category })
+    const categoryItem = await Category.findOne({ name: body.category })
     await Record.create({
       name: body.name,
       date: body.date,
       cost: body.cost,
-      categoryId: categoryId._id
+      categoryId: categoryItem._id
     })
     res.redirect('/')
   }
@@ -67,15 +68,40 @@ app.post('/new', async (req, res) => {
 })
 
 //edit page
-app.get('/edit', (req, res) => {
-  res.render('edit')
+app.get('/edit/:_id', (req, res) => {
+  const id = req.params._id
+  Record.findOne({ _id: id })
+    .lean()
+    .then(record => {
+      return Category.findOne({ _id: record.categoryId })
+        .then(category => {
+          record.categoryName = category.name
+          return record
+        })
+    })
+    .then(record => {
+      record.date = record.date.toISOString().slice(0, 10)
+      res.render('edit', { record })
+    })
 })
 
 //post edit table
-app.post('/edit', (req, res) => {
+app.post('/edit/:_id', (req, res) => {
+  const id = req.params._id
   const body = req.body
-  console.log(body) //test
-  res.render('edit', { body })
+  return Category.findOne({ name: body.category })
+    .then(categoryItem => {
+      return Record.findOne({ _id: id })
+        .then(record => {
+          record.name = body.name
+          record.date = body.date
+          record.cost = body.cost
+          record.categoryId = categoryItem._id
+          return record.save()
+        })
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.log(error))
 })
 
 //delete function
