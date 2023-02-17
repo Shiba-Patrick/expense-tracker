@@ -1,14 +1,46 @@
 const express = require('express')
 const router = express.Router()
+const Record = require('../../models/record')
+const User = require('../../models/user')
 
 //login page
-router.get('/login',(req, res)=>{
+router.get('/login', (req, res) => {
   res.render('login')
 })
-
-//login page
+//register page
 router.get('/register', (req, res) => {
   res.render('register')
+})
+
+//post register
+router.post('/register', (req, res) => {
+  const { name, email, password, confirmPassword } = req.body
+
+  //error status
+  if (!email || !password || !confirmPassword) {
+    console.log('請確認是否有無填寫的欄位!!!')
+    res.redirect('/users/register')
+  }
+  if (password !== confirmPassword) {
+    console.log('密碼與確認密碼不相符!!!')
+    res.redirect('/users/register')
+  }
+  User.findOne({ email })
+    .then(user => {
+      if (user) {
+        console.log('這個信箱註冊過了喔!!!')
+        return res.render('register', { name, email })
+      } else {
+        return User.create({
+          name,
+          email,
+          password
+        })
+          .then(() => res.redirect('login'))
+          .catch(error => console.log(error))
+      }
+    })
+    .catch(error => console.log(error))
 })
 
 module.exports = router

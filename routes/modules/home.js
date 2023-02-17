@@ -20,22 +20,22 @@ router.get('/', async (req, res) => {
 })
 
 //search-bar function
-router.post('/search',async (req, res)=>{
+router.post('/search', async (req, res) => {
   let totalAmount = 0
   const search = req.body.search
-  const categoryItem =await Category.findOne({ name: search})
+  const categoryItem = await Category.findOne({ name: search })
   const categoryId = categoryItem._id
-  const allRecords = await Record.find().lean().sort({ _id: 'asc'})
-  const filterRecords = allRecords.filter(record =>{
+  const allRecords = await Record.find().lean().sort({ _id: 'asc' })
+  const filterRecords = allRecords.filter(record => {
     return (JSON.stringify(record.categoryId)) === (JSON.stringify(categoryId))
   })
-  const records = filterRecords.map(record =>{
+  const records = filterRecords.map(record => {
     record.categoryIcon = categoryItem.icon
-    record.date = record.date.toISOString().slice(0 ,10)
+    record.date = record.date.toISOString().slice(0, 10)
     totalAmount += record.cost
     return record
   })
-  records.totalAmount =totalAmount
+  records.totalAmount = totalAmount
   records.categoryName = categoryItem.name
   res.render('index', { records })
 })

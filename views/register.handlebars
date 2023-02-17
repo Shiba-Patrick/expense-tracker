@@ -4,22 +4,22 @@
       <div class="card">
         <div class="card-body">
           <h2 class="card-title text-center  mb-3">註冊/Register</h2>
-          <form>
+
+          <form action="/users/register" method="post">
             <div class="mb-3 d-flex flex-row row">
               <p class="col-4 text-danger text-center fw-light m-0">*雙星號為必填欄位*</p>
             </div>
             <div class="mb-3">
               <label for="name" class="form-label ">名稱/Name</label>
-              <input type="text" class="form-control" id="name" name="name" placeholder="請輸入您的名稱">
+              <input type="text" class="form-control" id="name" name="name" placeholder="請輸入您的名稱" value="{{name}}">
             </div>
             <div class="mb-3">
               <label for="email" class="form-label ">*信箱/Email*</label>
-              <input type="email" class="form-control" id="email" name="email" placeholder="請輸入您的信箱">
+              <input type="email" class="form-control" id="email" name="email" placeholder="請輸入您的信箱" value="{{email}}">
             </div>
             <div class="mb-3">
               <label for="password" class="form-label ">*密碼/Password*</label>
-              <input type="password" class="form-control" id="password" name="password"
-                placeholder="請輸入您的密碼">
+              <input type="password" class="form-control" id="password" name="password" placeholder="請輸入您的密碼">
             </div>
             <div class="mb-3">
               <label for="confirmPassword" class="form-label ">*再次確認密碼/Confirm Password*</label>
@@ -30,10 +30,12 @@
               <button type="submit" class="btn btn-info ">註冊/Register</button>
             </div>
           </form>
+
           <div class="mt-3  text-center">
             <p class="card-text d-inline me-2">已經有會員了嗎?/Already have an account ?</p>
             <a href="/users/login" class="d-inline text-decoration-none">登入/Login</a>
           </div>
+
         </div>
       </div>
     </div>
