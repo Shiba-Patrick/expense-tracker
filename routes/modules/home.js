@@ -10,9 +10,9 @@ router.get('/', async (req, res) => {
     let totalAmount = 0
     const email = req.user.email
     const user = await User.findOne({ email })
-    const useId = user._id
+    const userId = user._id
 
-    const items = await Record.find({ useId }).lean().sort({ _id: 'asc' })
+    const items = await Record.find({ userId }).lean().sort({ _id: 'asc' })
     const records = await Promise.all(items.map(async (item) => {
       const category = await Category.findOne({ _id: item.categoryId })
       item.categoryIcon = category.icon
@@ -36,7 +36,6 @@ router.post('/search', async (req, res) => {
     const email = req.user.email
     const user = await User.findOne({ email })
     const userId = user._id
-
     const search = req.body.search
     const categoryItem = await Category.findOne({ name: search })
     const categoryId = categoryItem._id
@@ -54,10 +53,11 @@ router.post('/search', async (req, res) => {
     records.categoryName = categoryItem.name
     res.render('index', { records })
   }
-
   catch (error) {
     console.log(error)
   }
 })
+
+
 
 module.exports = router

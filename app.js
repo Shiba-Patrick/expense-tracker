@@ -23,7 +23,7 @@ app.engine('handlebars', express_hbs({ defaultLayout: 'main' }))
 app.set('view engine', 'handlebars') 
 
 app.use(session({
-  secret: 'PatrickCode0214',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
 }))
