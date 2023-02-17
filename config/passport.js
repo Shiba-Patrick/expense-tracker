@@ -8,14 +8,14 @@ module.exports = app => {
   app.use(passport.session());
 
   // Local登入策略:新增passReqToCallback: true
-  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+  passport.use(new LocalStrategy({ usernameField: 'email', passReqToCallback: true }, (req, email, password, done) => {
     User.findOne({ email })
       .then(user => {
         if (!user) {
-          return done(null, false)
+          return done(null, false, req.flash('warning_msg', '這個mail沒有註冊過喔'))
         }
         if (user.password !== password) {
-          return done(null, false)
+          return done(null, false, req.flash('warning_msg', '密碼不對喔!!!'))
         }
         return done(null, user);
       })
