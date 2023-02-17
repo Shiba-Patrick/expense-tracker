@@ -1,6 +1,7 @@
 <div class="container mt-5">
   <div class="row d-flex flex-column align-items-center">
     <form class="col-4" action="/records/{{record._id}}?_method=PUT" method="post">
+      {{> message}}
       <div class="mb-4 d-flex flex-row row">
         <p class="col-4 text-danger fw-light m-0 fs-5">欄位皆為必填</p>
         <p class="col m-0 text-center badge bg-secondary fs-4">請修改內容</p>
@@ -37,6 +38,7 @@
       </div>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-warning col-2 mt-3">修改</button>
+        <a class="btn btn-info col-2 mt-3" href="/" role="button">首頁</a>
       </div>
     </form>
   </div>

@@ -4,17 +4,24 @@
     <div class="col-3">
 
       <form class="d-flex flex-row" action="/search" method="POST">
-        <label for="search" class="form-label col-3 m-0 d-flex align-items-center">選擇類別:</label>
-        <select class="form-select col" id="search" name="search">
+        <label for="search" class="form-label col-3 m-0 d-flex align-items-center">選擇類別</label>
+
+        <select class="form-select col" id="search" name="search" onchange="this.form.submit()">
+          {{#if records.categoryName}}
           <option value="{{records.categoryName}}" hidden="hidden" selected="selected">{{records.categoryName}}
           </option>
+          {{else}}
+          <option value="全部" hidden="hidden" selected="selected">
+            全部
+          </option>
+          {{/if}}
+          <option value="全部">全部</option>
           <option value="家居物業">家居物業</option>
           <option value="交通出行">交通出行</option>
           <option value="休閒娛樂">休閒娛樂</option>
           <option value="餐飲食品">餐飲食品</option>
           <option value="其他">其他</option>
         </select>
-        <button type="submit" class="btn btn-primary col-2 ms-2"><i class="fa-solid fa-magnifying-glass"></i></button>
       </form>
 
     </div>
@@ -37,7 +44,7 @@
           <button type="submit" class="btn btn-outline-primary">修改</button>
         </form>
         <form class="col-1 text-end" action="/records/{{ this._id }}?_method=DELETE" method="POST">
-          <button type="submit" class="btn btn-outline-danger">刪除</button>
+          <button type="submit" class="btn btn-outline-danger" onclick="return confirm(`確認是否刪除:{{ this.name }}?`)">刪除</button>
         </form>
       </li>
       {{/each}}

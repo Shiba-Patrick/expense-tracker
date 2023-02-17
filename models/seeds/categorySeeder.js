@@ -1,5 +1,4 @@
 const db = require('../../config/mongoose')
-const mongoose = require('mongoose')
 const Category = require('../category')
 
 if (process.env.NODE_ENV !== 'production') {
@@ -29,15 +28,13 @@ const categoryList = [
   }
 ]
 
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config()
-}
-
-db.on('error', () => {
-  console.log('mongoDB error!!!!!!!')
-})
-db.once('open', () => {
-  Category.insertMany(categoryList)
-    .then(() => console.log('categorySeeder created!!!'))
-    .catch(error => console.log(error))
+db.once('open', async() => {
+  try{
+    await Category.insertMany(categoryList)
+    console.log('categorySeeder created!!!')
+    process.exit()
+  }
+  catch(error) {
+    console.log(error)
+  }
 })
