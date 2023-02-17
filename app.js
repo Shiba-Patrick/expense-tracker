@@ -3,7 +3,9 @@ const express_hbs = require('express-handlebars')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 const methodOverride = require('method-override')
+const session = require('express-session')
 const routes = require('./routes')
+const usePassport = require('./config/passport')
 
 require('./config/mongoose')//load config mongoose
 // 非正式環境下使用dotenv
@@ -14,13 +16,18 @@ if (process.env.NODE_ENV !== 'production') {
 const app = express()
 const port = process.env.PORT
 
-//handlebars模板引勤
-app.engine('handlebars', express_hbs({ defaultLayout: 'main' }))
-app.set('view engine', 'handlebars')
-
+app.engine('handlebars', express_hbs({ defaultLayout: 'main' })) //handlebars模板引勤
+app.set('view engine', 'handlebars') //handlebars模板引勤
 app.use(bodyParser.urlencoded({ extended: true })) //連結post傳入
 app.use(methodOverride('_method'))//解構CRUD
 
+app.use(session({
+  secret: 'PatrickCode0214',
+  resave: false,
+  saveUninitialized: true,
+}))
+
+usePassport(app)
 app.use(routes)
 
 app.listen(port, () => {

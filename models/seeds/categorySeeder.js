@@ -38,6 +38,6 @@ db.on('error', () => {
 })
 db.once('open', () => {
   Category.insertMany(categoryList)
-  .then(()=> console.log('categorySeeder created!!!'))
-  .catch(error => console.log(error))
+    .then(() => console.log('categorySeeder created!!!'))
+    .catch(error => console.log(error))
 })
