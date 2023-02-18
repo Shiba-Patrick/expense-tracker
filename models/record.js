@@ -14,13 +14,13 @@ const recordSchema = new Schema({
     type: Number,
     required: true
   },
-  categoryId: {
+  categoryId: { //connect categoryDB
     type: Schema.Types.ObjectId,
     ref: 'Category',
     index: true,
     required: true
   },
-  userId:{
+  userId: { //connect userDB
     type: Schema.Types.ObjectId,
     ref: 'User',
     index: true,

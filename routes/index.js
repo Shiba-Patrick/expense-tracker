@@ -7,6 +7,7 @@ const auth = require('./modules/auth')
 
 const { authenticator } = require('../middleware/auth') // 掛載 middleware
 
+//按照順序擺放
 router.use('/records', authenticator, records)
 router.use('/users', users)
 router.use('/auth', auth)

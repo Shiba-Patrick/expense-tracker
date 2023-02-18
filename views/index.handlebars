@@ -44,7 +44,8 @@
           <button type="submit" class="btn btn-outline-primary">修改</button>
         </form>
         <form class="col-1 text-end" action="/records/{{ this._id }}?_method=DELETE" method="POST">
-          <button type="submit" class="btn btn-outline-danger" onclick="return confirm(`確認是否刪除:{{ this.name }}?`)">刪除</button>
+          <button type="submit" class="btn btn-outline-danger"
+            onclick="return confirm(`確認是否刪除:{{ this.name }}?`)">刪除</button>
         </form>
       </li>
       {{/each}}

@@ -10,19 +10,19 @@ router.get('/login', (req, res) => {
 })
 
 //passport login
-router.post('/login', (req, res, next)=>{
-  const { email, password} = req.body
-  if(!email || !password){
+router.post('/login', (req, res, next) => {
+  const { email, password } = req.body
+  if (!email || !password) {
     req.flash('warning_msg', '請再次確認您的信箱與密碼是否都有填寫')
     return res.redirect('/users/login')
   }
   next()
 },
   passport.authenticate('local', {
-  successRedirect: '/',
-  failureRedirect: '/users/login',
-  failureFlash: true
-}))
+    successRedirect: '/',
+    failureRedirect: '/users/login',
+    failureFlash: true
+  }))
 
 // logout
 router.get('/logout', (req, res) => {
@@ -55,16 +55,16 @@ router.post('/register', (req, res) => {
       if (user) {
         errors.push({ message: '這個信箱已經被註冊過了喔!!!' })
         return res.render('register', { errors, name, email })
-      } 
-        return bcrypt.genSalt(10)
-        .then(salt => bcrypt.hash(password, salt)) 
+      }
+      return bcrypt.genSalt(10)
+        .then(salt => bcrypt.hash(password, salt))
         .then(hash => User.create({
           name,
           email,
           password: hash
         }))
-          .then(() => res.redirect('login'))
-          .catch(error => console.log(error))
+        .then(() => res.redirect('login'))
+        .catch(error => console.log(error))
     })
     .catch(error => console.log(error))
 })

@@ -26,6 +26,7 @@ const SeedUser = [
 //create seed
 db.once('open', async () => {
   try {
+    //加密處理產生種子使用者
     await Promise.all(SeedUser.map(async (user) => {
       const { name, email, password } = user
       const salt = await bcrypt.genSalt(10)
@@ -35,6 +36,7 @@ db.once('open', async () => {
         email,
         password: hash,
       })
+      //取得使用者key鍵並產生種子record
       const userId = seederUser._id
       await Promise.all(user.recordIndexes.map(async (index) => {
         const record = RecordList[index]
@@ -52,7 +54,7 @@ db.once('open', async () => {
     console.log('user&recordSeeder created!!!')
     process.exit()
   }
-  catch(error){
+  catch (error) {
     console.log(error)
   }
 })

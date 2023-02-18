@@ -4,14 +4,12 @@ const Record = require('../../models/record')
 const Category = require('../../models/category')
 const User = require('../../models/user')
 
-//藉由email來尋找user,category則透過name,其中_id來抓取record與兩資料庫的關聯
-
 //home page
 router.get('/', async (req, res) => {
   try {
     let totalAmount = 0
     const userId = req.user._id
-    const items = await Record.find({ userId }).lean().sort({ date: 'desc' })
+    const items = await Record.find({ userId }).lean().sort({ date: 'desc' }) //資料排序遞減
     const records = await Promise.all(items.map(async (item) => {
       const category = await Category.findOne({ _id: item.categoryId })
       item.categoryIcon = category.icon
@@ -35,8 +33,9 @@ router.post('/search', async (req, res) => {
     const userId = req.user._id
     const allRecords = await Record.find({ userId }).lean().sort({ date: 'desc' })
     const search = req.body.search
+
     if (search === '全部') {
-      // 如果是篩選全部
+      // search all
       const records = await Promise.all(allRecords.map(async (record) => {
         const category = await Category.findOne({ _id: record.categoryId })
         record.categoryIcon = category.icon
@@ -47,11 +46,10 @@ router.post('/search', async (req, res) => {
       records.totalAmount = totalAmount
       res.render('index', { records })
     } else {
-      // 如果是篩選個別選項
+      // search one
       const categoryItem = await Category.findOne({ name: search })
       const categoryId = categoryItem._id
-      // 篩選出特定category的records
-      const filteredRecords = allRecords.filter(record => {
+      const filteredRecords = allRecords.filter(record => { //filter篩選
         return (JSON.stringify(record.categoryId)) === (JSON.stringify(categoryId))
       })
       const records = filteredRecords.map(record => {

@@ -19,8 +19,8 @@ const app = express()
 const port = process.env.PORT
 
 //handlebars模板引勤
-app.engine('handlebars', express_hbs({ defaultLayout: 'main' })) 
-app.set('view engine', 'handlebars') 
+app.engine('handlebars', express_hbs({ defaultLayout: 'main' }))
+app.set('view engine', 'handlebars')
 
 app.use(session({
   secret: process.env.SESSION_SECRET,
@@ -39,7 +39,6 @@ app.use((req, res, next) => {
   res.locals.user = req.user
   res.locals.success_msg = req.flash('success_msg')
   res.locals.warning_msg = req.flash('warning_msg')
-  res.locals.error_msg = req.flash('error')
   next()
 })
 app.use(routes)

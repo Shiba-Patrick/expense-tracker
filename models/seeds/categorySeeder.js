@@ -28,13 +28,13 @@ const categoryList = [
   }
 ]
 
-db.once('open', async() => {
-  try{
+db.once('open', async () => {
+  try {
     await Category.insertMany(categoryList)
     console.log('categorySeeder created!!!')
     process.exit()
   }
-  catch(error) {
+  catch (error) {
     console.log(error)
   }
 })
